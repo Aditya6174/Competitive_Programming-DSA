@@ -1,0 +1,108 @@
+#include <bits/stdc++.h>
+#define input(x) for(auto &a:x)cin>>a
+#define print(x) for(auto &a:x){cout<<a<<' ';}cout<<endl
+#define ppcl(x) __builtin_popcountll(x)
+#define ppc(x) __builtin_popcount(x)
+#define all(x) x.begin(), x.end()
+#define ll long long int
+#define pb push_back
+#define INF LLONG_MAX
+#define NINF LLONG_MIN
+#define pii pair<int,int> 
+#define fr first
+#define sc second 
+#define nline endl
+using namespace std;
+const ll MOD = 998244353;
+const int MAXN = 200001;
+const int MAX = 1000001;
+bool prime[MAX];
+ll fast_exp(int base, int exp) {
+    ll res=1;
+    while(exp>0) {
+       if(exp%2==1) 
+       res=(res*base)%MOD;
+       base=(base*base)%MOD;
+       exp/=2;
+    }
+    return res;
+}
+void Algo_Messiah(){
+    map<int,int> mp;
+	int n;
+	cin>>n;
+	vector<int> a(n);
+	input(a);
+	for(auto& i : a)
+	mp[i]++;
+	for(auto& i : mp){
+  
+	    if(i.sc % i.fr != 0){
+	        cout<<"-1"<<endl;
+	        return;
+	    }
+      
+	}
+    vector<int> ans;
+    int usable = 1;
+    map<int,pair<int,int>> pr;
+    
+    for(int i=0;i<n;++i){
+    
+        if(pr.find(a[i]) == pr.end()){
+        
+            pair<int,int> tp;
+            tp.fr = usable;
+            tp.sc = a[i] - 1;
+            pr[a[i]] = tp;
+            if(pr[a[i]].sc == 0){
+                pr.erase(a[i]);
+                
+            }
+            ans.pb(usable);
+            usable += 1;
+            
+        }
+        else{
+        
+            if(pr[a[i]].sc > 0){
+                ans.pb(pr[a[i]].fr);
+                pr[a[i]].sc -= 1;
+                if(pr[a[i]].sc == 0){
+                    pr.erase(a[i]);
+                    
+                }
+                
+            }
+            
+        }
+    }
+    for(auto& itr : pr){
+        if(itr.sc.sc > 0){
+            cout<<-1<<endl;
+            return;
+        }
+    }
+    for(auto& i : ans)
+    cout<<i<<" ";
+    cout<<endl;
+
+}
+int main(){
+    // #ifndef ONLINE_JUDGE
+    //     //for getting input from input1.txt
+    //     freopen("input1.txt", "r", stdin);
+    //     //for getting output from output1.txt
+    //     freopen("output1.txt", "w", stdout);
+    // #endif
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); // remove in problems with online query
+    int testcase = 1;
+    cin >> testcase;
+    int x = 1;
+    while(testcase--){
+        //cout << "Case #" << x << ": ";
+        Algo_Messiah();
+        x++;
+    }
+}
