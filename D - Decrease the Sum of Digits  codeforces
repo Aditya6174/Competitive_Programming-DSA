@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+#define input(x) for(auto &a:x)cin>>a
+#define print(x) for(auto &a:x){cout<<a<<' ';}cout<<endl
+#define ppcl(x) __builtin_popcountll(x)
+#define ppc(x) __builtin_popcount(x)
+#define all(x) x.begin(), x.end()
+#define ll long long int
+#define pb push_back
+#define INF LLONG_MAX
+#define NINF LLONG_MIN
+#define pii pair<int,int> 
+#define fr first
+#define sc second 
+#define nline endl
+using namespace std;
+const ll mod = 1e9 + 7;
+const int MAXN = 200001;
+ll sum(long long n){
+    ll sum = 0;
+    while(n != 0){
+        sum += n % 10;
+        n /= 10;
+    }
+    return sum;
+}
+ll countdig(ll n){
+    ll count = 0;
+    while(n != 0){
+        count ++;
+        n /= 10;
+    }
+    return count;
+}
+void Algo_Messiah(){
+    long long n;
+		int s;
+		cin >> n >> s;
+		long long ans = 0;
+		if (sum(n) <= s) {
+			cout << 0 << endl;
+			return ;
+		}
+		long long pw = 1;
+		for (int i = 0; i < 18; ++i) {
+			int digit = (n / pw) % 10;
+			long long add = pw * ((10 - digit) % 10);
+			n += add;
+			ans += add;
+			if (sum(n) <= s) {
+				break;
+			}
+			pw *= 10;
+		}
+		cout << ans << endl;
+	}
+ 
+int main(){
+    // #ifndef ONLINE_JUDGE
+    //     //for getting input from input1.txt
+    //     freopen("input1.txt", "r", stdin);
+    //     //for getting output from output1.txt
+    //     freopen("output1.txt", "w", stdout);
+    // #endif
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); // remove in problems with online query
+    int testcase = 1;
+    cin >> testcase;
+    int x = 1;
+    while(testcase--){
+        //cout << "Case #" << x << ": ";
+        Algo_Messiah();
+        x++;
+    }
+}
