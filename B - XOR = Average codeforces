@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+#define input(x) for(auto &a:x)cin>>a
+#define print(x) for(auto &a:x){cout<<a<<' ';}cout<<endl
+#define ppcl(x) __builtin_popcountll(x)
+#define ppc(x) __builtin_popcount(x)
+#define all(x) x.begin(), x.end()
+#define ll long long int
+#define pb push_back
+#define INF LLONG_MAX
+#define NINF LLONG_MIN
+#define pii pair<int,int> 
+#define fr first
+#define sc second 
+#define nline endl
+using namespace std;
+const ll mod = 1e9 + 7;
+int ans[1000000];
+const int MAXN = 200001;
+bool check(ll n){
+	int c = 0;
+	while(n > 0){
+		if(n%10 != 0){
+			c++;
+		}
+		if(c > 1)
+		return  false;
+		n /= 10;
+	}
+	return true;
+}
+void algo_messiah(){
+	int n;
+	cin>>n;
+	if(n&1){
+		while(n--)
+		cout<<1<<" ";
+		cout<<endl;
+		return ;
+	}
+	cout<<1<<" "<<3<<" ";
+	n -= 2;
+	while(n --)
+	cout<<2<<" ";
+	cout<<endl;
+}
+int main(){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); // remove in problems with online query
+	int testCase=1;
+	cin >> testCase;
+	ans[0] = 0;
+	for(int i=1;i<=999999;i++){
+		if(check(i))
+		ans[i] = 1;
+		else
+		ans[i] = 0;
+	}
+	for(int i=1;i<1000000;i++){
+		ans[i] = ans[i] + ans[i-1];
+	}
+	 while(testCase--){
+	    algo_messiah();
+	}
+}
