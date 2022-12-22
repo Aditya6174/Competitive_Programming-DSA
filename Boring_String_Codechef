@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+#define input(x) for(auto &a:x)cin>>a
+#define print(x) for(auto &a:x){cout<<a<<' ';}cout<<endl
+#define ppcl(x) __builtin_popcountll(x)
+#define ppc(x) __builtin_popcount(x)
+#define all(x) x.begin(), x.end()
+#define ll long long int
+#define pb push_back
+#define INF LLONG_MAX
+#define NINF LLONG_MIN
+#define pii pair<int,int> 
+#define fr first
+#define sc second 
+#define nline endl
+using namespace std;
+const ll MOD = 1e9 + 7;
+const int MAXN = 200001;
+void algo_messiah(){
+	ll n;
+	string s;
+	cin>>n>>s;
+	ll ans = INT_MIN;
+	map<pair<char,ll>,ll> mp;
+	char ch = s[0];
+	int l = 1;
+	pair<char,int> pr;
+	pr.fr = ch;
+	pr.sc = l;
+	mp[pr]++;
+	int i = 1;
+	while(i < n){
+		if(ch == s[i]){
+			l++;
+		}
+		else{
+			l = 1;
+			ch = s[i];
+		}
+		pr.fr = ch;
+		pr.sc = l;
+		mp[pr]++;
+		i++;
+	}
+	for(auto& i : mp){
+		if(i.second != 1)
+		ans = max(ans,i.fr.sc);
+		else
+		ans = max(ans,i.fr.sc-1);
+	}
+	cout<<ans<<endl;
+	return ;
+}
+int main(){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); // remove in problems with online query
+	int testCase=1;
+	cin >> testCase;
+	int x = 1;
+	while(testCase--){
+	    algo_messiah();
+    //cout<<"Case #"<<x<<": "<<total<<endl;
+    x++;
+	}
+}
