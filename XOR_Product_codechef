@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+#define input(x) for(auto &a:x)cin>>a
+#define print(x) for(auto &a:x){cout<<a<<' ';}cout<<endl
+#define ppcl(x) __builtin_popcountll(x)
+#define ppc(x) __builtin_popcount(x)
+#define all(x) x.begin(), x.end()
+#define ll long long int
+#define pb push_back
+#define INF LLONG_MAX
+#define NINF LLONG_MIN
+#define pii pair<int,int> 
+#define fr first
+#define sc second 
+#define nline endl
+using namespace std;
+const ll MOD = 998244353;
+const int MAXN = 200001;
+void algo_messiah(){
+    ll n;
+    cin>>n;
+    vector<ll> arr(n);
+    input(arr);
+    ll one = 0;
+    vector<ll> odd,even;
+    for(auto& i : arr){
+        if(i == 1)
+        one++;
+    }
+    sort(all(arr));
+    ll i = 0,ans=1;
+    while(i < n){
+        if(one == 0)
+        break;
+        if(arr[i] % 2 == 0 && one > 0){
+            arr[i]++;
+            one --;
+        }
+        i++;
+    }
+    i = 0;
+    while(i < n){
+        ans = (ans*arr[i])%MOD;
+        i++;
+    }
+    cout<<ans<<nline;
+}
+int main(){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); // remove in problems with online query
+	int testCase=1;
+	cin >> testCase;
+	int x = 1;
+	while(testCase--){
+	    algo_messiah();
+    //cout<<"Case #"<<x<<": "<<total<<endl;
+    x++;
+	}
+}
