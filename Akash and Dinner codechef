@@ -1,0 +1,88 @@
+#include <bits/stdc++.h>
+#define input(x) for(auto &a:x)cin>>a
+#define print(x) for(auto &a:x){cout<<a<<' ';}cout<<endl
+#define ppcl(x) __builtin_popcountll(x)
+#define ppc(x) __builtin_popcount(x)
+#define all(x) x.begin(), x.end()
+#define ll long long int
+#define pb push_back
+#define INF LLONG_MAX
+#define NINF LLONG_MIN
+#define pii pair<int,int> 
+#define fr first
+#define sc second 
+#define nline endl
+using namespace std;
+const ll MOD = 998244353;
+const int MAXN = 200001;
+const int MAX = 1000001;
+bool prime[MAX];
+ll fast_exp(int base, int exp) {
+    ll res=1;
+    while(exp>0) {
+       if(exp%2==1) 
+       res=(res*base)%MOD;
+       base=(base*base)%MOD;
+       exp/=2;
+    }
+    return res;
+}
+void Algo_Messiah(){
+    ll n,k;
+	cin>>n>>k;
+	std::vector<ll> a(n);
+	vector<ll> b(n);
+	input(a);input(b);
+	vector<pair<ll,ll>> arr(n);
+    unordered_set<ll> st;
+	for(int i=0;i<n;i++){
+	    arr.pb({b[i],a[i]});
+	    st.insert(a[i]);
+	}
+	if(st.size() < k){
+	    cout<<-1<<endl;
+	    return ;
+	}
+	sort(all(arr));
+	vector<vector<ll>> ar(MAX);
+	for(int i=0;i<n;i++){
+	    ar[a[i]].pb(b[i]);
+	}
+    for(int i=1;i<ar.size();i++)
+    sort(all(ar[i]));
+    vector<pair<int,int>> pr;
+    for(int i=1;i<ar.size();i++){
+        if(ar[i].size() != 0){
+            pr.pb({ar[i][0],i});
+        }
+    }
+    sort(all(pr));
+    int c = 0;
+    ll sum = 0;
+    for(auto& i : pr){
+        c++;
+        sum += i.first;
+        if(c == k)
+        break;
+    }
+    cout<<sum<<endl;
+    return ;
+}
+int main(){
+    // #ifndef ONLINE_JUDGE
+    //     //for getting input from input1.txt
+    //     freopen("input1.txt", "r", stdin);
+    //     //for getting output from output1.txt
+    //     freopen("output1.txt", "w", stdout);
+    // #endif
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); // remove in problems with online query
+    int testcase = 1;
+    cin >> testcase;
+    int x = 1;
+    while(testcase--){
+        //cout << "Case #" << x << ": ";
+        Algo_Messiah();
+        x++;
+    }
+}
