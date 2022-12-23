@@ -1,0 +1,103 @@
+#include <bits/stdc++.h>
+#include <vector>
+#include <iostream> 
+#define ll long long int
+#define pb push_back
+using namespace std;
+const ll mod = 1e9 + 7;
+const int MAXN = 200001;
+#include <vector>
+#include <unordered_map>
+#include <utility>
+int dc(int n){
+    int c = 0;
+    while(n > 0){
+        c++;
+        n /= 10;
+    }
+    return c;
+}
+void algo_messiah(){
+    //IMPLEMENTATION AND HASHING
+    int n;
+    cin>>n;
+    int x[n];
+    int y[n];
+    map<int,int> a,b,c,d;
+    int count = 0;
+    vector<int> p,q;
+    for(int i=0;i<n;i++){
+        cin>>x[i];
+        a[x[i]]++;
+    }
+    for(int i=0;i<n;i++){
+        cin>>y[i];
+        b[y[i]]++;
+    }
+    for(int i=0;i<n;i++){
+        if(a[x[i]] >= 1 && b[x[i]] >= 1){
+        a[x[i]] --;
+        b[x[i]] --;
+        }
+    }
+    for(int i=0;i<n;i++){
+        if(a[x[i]] >= 1 && x[i] >= 10){
+            int k = x[i];
+            int cnt = dc(k);a[k]--;
+            p.pb(cnt);
+            c[cnt]++;
+            count++;
+        }
+        else if(a[x[i]] >= 1){
+            p.pb(x[i]);
+            a[x[i]]--;
+            c[x[i]]++;
+        }
+    }
+    for(int i=0;i<n;i++){
+        if(b[y[i]] >= 1 && y[i] >= 10){
+            int k = y[i];
+            int cnt = dc(k);b[k]--;
+            q.pb(cnt);
+            d[cnt]++;
+            count++;
+        }
+        else if(b[y[i]] >= 1){
+            q.pb(y[i]);
+            b[y[i]]--;
+            d[y[i]]++;
+        }
+    }
+    int cn = 0;
+    for(int i=0;i<p.size();i++){
+        if(c[p[i]] != 0 && d[p[i]] >= 1){
+            c[p[i]] --;
+            d[p[i]] --;
+            cn++;
+        }
+    }
+    for(int i=0;i<p.size();i++){
+        if(c[p[i]] != 0 && p[i] != 1){
+            count++;
+            c[p[i]] --;
+        }
+    }
+    for(int i=0;i<q.size();i++){
+        if(d[q[i]] != 0 && q[i] != 1){
+            count++;
+            d[q[i]]--;
+        }
+    }
+    cout<<count<<endl;
+}
+int main(){
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); // remove in problems with online query
+  /*Float like a butterfly, sting like a bee.
+    The hands can't hit what the eyes can't see.*/
+	int testCase=1;
+	cin >> testCase;
+	while(testCase--){
+	    algo_messiah();
+	}
+}
