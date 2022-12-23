@@ -1,0 +1,35 @@
+class Solution {
+public:
+    void solve(int col,vector<string>& board , int& ans,int n,vector<int>& lowerdiag , vector<int>& uppdiag , vector<int>& leftcol){
+        if(col == n){
+            ans++;
+            return ;
+        }
+        for(int i=0;i<n;i++){
+            if(lowerdiag[i+col] == 0 && uppdiag[n-1+col-i] == 0 && leftcol[i] == 0){
+                board[i][col] = 'Q';
+                lowerdiag[i+col] = 1;
+                uppdiag[n-1+col-i] = 1;
+                leftcol[i] = 1;
+                solve(col+1,board,ans,n,lowerdiag,uppdiag,leftcol);
+                lowerdiag[i+col] = 0;
+                uppdiag[n-1+col-i] = 0;
+                leftcol[i] = 0;
+                board[i][col] = '.';
+            }
+        }
+    }
+    int totalNQueens(int n) {
+        int ans = 0;
+        vector<string> board(n);
+        string s(n,'.');
+        for(int i=0;i<n;i++){
+            board[i] = s;
+        }
+        vector<int> lowerdiag(2*n-1,0);
+        vector<int> uppdiag(2*n - 1,0);
+        vector<int> leftcol(n,0);
+        solve(0,board,ans,n,lowerdiag,uppdiag,leftcol);
+        return ans;
+    }
+};
