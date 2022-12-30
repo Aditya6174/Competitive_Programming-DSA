@@ -1,0 +1,56 @@
+class Solution {
+    private :
+    void leftsub(Node* root,vector<int> &ans){
+        if(root == NULL || (root->left == NULL && root->right == NULL))
+        return ;
+        ans.push_back(root->data);
+        if(root->left != NULL){
+            
+            leftsub(root->left,ans);
+        }
+        else{
+            if(root->right != NULL){
+                leftsub(root->right,ans);
+            }
+        }
+    }
+    void rightsub(Node* root,vector<int> &ans){
+        if(root == NULL || (root->left == NULL && root->right == NULL))
+        return ;
+        if(root->right != NULL){
+            rightsub(root->right,ans);
+        }
+        else{
+            rightsub(root->left,ans);
+        }
+        ans.push_back(root->data);
+    }
+    void leaf(Node* root , vector<int> &ans){
+        if(root == NULL)
+        return ;
+        if(root->left == NULL && root->right == NULL){
+            ans.push_back(root->data);
+            return ;
+        }
+        if(root->left != NULL)
+        leaf(root->left,ans);
+        if(root->right != NULL)
+        leaf(root->right,ans);
+    }
+    public:
+    vector <int> boundary(Node *root)
+    {
+        //Your code here
+        vector<int> ans;
+        if(root == NULL)
+        return ans;
+        ans.push_back(root->data);
+        if(root -> left == NULL && root->right == NULL){
+            return ans;
+        }
+        leftsub(root->left,ans);
+        leaf(root,ans);
+        rightsub(root->right,ans);
+        return ans;
+    }
+};
