@@ -1,0 +1,34 @@
+class Solution
+{
+    pair<bool,int> sumtree(Node* root){
+        if(root == NULL){
+            pair<bool,int> mp = {true,0};
+            return mp;
+        }
+        if(root->left == NULL && root->right == NULL){
+            pair<bool,int> p = {true,root->data};
+            return p;
+        }
+        pair<bool,int> leftans = sumtree(root->left);
+        pair<bool,int> rightans = sumtree(root->right);
+        pair<bool,int> ans;
+        bool cond1 = leftans.first;
+        bool cond2 = rightans.first;
+        bool cond3 = root->data == leftans.second + rightans.second;
+        if(cond1 && cond2 && cond3){
+            ans.first = true;
+            ans.second = 2*root->data;
+        }
+        else{
+            ans.first = false;
+        }
+        return ans;
+    }
+    public:
+    bool isSumTree(Node* root)
+    {
+         // Your code here
+         pair<bool,int> ans = sumtree(root);
+        return ans.first;
+    }
+};
