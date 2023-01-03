@@ -1,0 +1,24 @@
+class Solution {
+    int power(int k,int count){
+        if(k == 1)
+        return count;
+        count++;
+        if(k&1){
+            return power(k*3 + 1,count);
+        }
+        return power(k/2,count);
+    }
+public:
+    int getKth(int lo, int hi, int k) {
+        vector<pair<int,int>> v;
+        for(int i=lo;i<=hi;i++){
+            pair<int,int> pr ;
+            int ko = power(i,0);
+            pr.first = ko;
+            pr.second = i;
+            v.push_back(pr);
+        }
+        sort(v.begin(),v.end());
+        return v[k-1].second;
+    }
+};
