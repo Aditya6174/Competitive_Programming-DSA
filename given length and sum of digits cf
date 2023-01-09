@@ -1,0 +1,77 @@
+#include <bits/stdc++.h>
+#define input(x) for(auto &a:x)cin>>a
+#define print(x) for(auto &a:x){cout<<a<<' ';}cout<<endl
+#define ppcl(x) __builtin_popcountll(x)
+#define ppc(x) __builtin_popcount(x)
+#define all(x) x.begin(), x.end()
+#define ll long long int
+#define pb push_back
+#define INF LLONG_MAX
+#define NINF LLONG_MIN
+#define pii pair<int,int> 
+#define fr first
+#define sc second 
+#define nline endl
+using namespace std;
+const ll MOD = 10e9+7;
+const int MAXN = 200001;
+const int MAX = 1000001;
+bool prime[MAX];
+ll fast_exp(int base, int exp) {
+    ll res=1;
+    while(exp>0) {
+       if(exp%2==1) 
+       res=(res*base)%MOD;
+       base=(base*base)%MOD;
+       exp/=2;
+    }
+    return res;
+}
+void Algo_Messiah(){
+    int m,s;
+    cin>>m>>s;
+    if(s == 0){
+        if(m == 1){
+            cout<<"0 0"<<endl;
+            return;
+        }
+        cout<<"-1 -1"<<nline;
+        return ;
+    }
+    string maxi = "";string mini = "";
+    for(int i=1;i<=m;i++){
+        int k = min(9,s);
+        maxi.pb('0'+k);
+        s -= k;
+    }
+    if(s > 0){
+        cout<<"-1 -1"<<nline;
+        return ;
+    }
+    int j = 0;
+    mini = maxi;
+    reverse(mini.begin(),mini.end());
+    while(mini[j] == '0')
+        j++;
+    mini[0]++;mini[j]--;
+    cout<<mini<<" "<<maxi<<nline;
+    return ;
+}
+int main(){
+    // #ifndef ONLINE_JUDGE
+    //     //for getting input from input1.txt
+    //     freopen("input1.txt", "r", stdin);
+    //     //for getting output from output1.txt
+    //     freopen("output1.txt", "w", stdout);
+    // #endif
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); // remove in problems with online query
+    int testcase = 1;
+    //cin >> testcase;
+    int x = 1;
+    while(testcase--){
+        //cout << "Case #" << x << ": ";
+        Algo_Messiah();
+        x++;
+    }
+}
