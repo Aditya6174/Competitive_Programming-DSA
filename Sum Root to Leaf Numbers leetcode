@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int sum = 0;
+    void solve(TreeNode* root,int &sum,int n){
+        if(!root)
+        return ;
+        n = n*10 + root->val;
+        if(!root->right && !root->left)
+        sum += n;
+        solve(root->left,sum,n);
+        solve(root->right,sum,n);
+    }
+    int sumNumbers(TreeNode* root) {
+        int sum = 0;
+        solve(root,sum,0);
+        return sum;
+    }
+};
